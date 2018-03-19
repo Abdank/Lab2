@@ -8,6 +8,9 @@ using System.Web;
 /// </summary>
 public sealed class StudentasSarasas
 {
+    /// <summary>
+    /// vieno elemento klasė
+    /// </summary>
     private sealed class Mazgas
     {
         public Studentas Duom { get; set; }
@@ -21,20 +24,32 @@ public sealed class StudentasSarasas
     private Mazgas pr; // sąrašo pradžią
     private Mazgas pb; // sąrašo pabaiga
     private Mazgas d; // sąrašo sąsaja
-    public double Fondas { get; private set; }
-    public double Reikalavimai { get; private set; }
+    public double Fondas { get; private set; } // Stipendijos fondas
+    public double Reikalavimai { get; private set; }  // Minimalus Pažimys stipendijai
 
+    /// <summary>
+    /// Įveda į studentų sąrašą // Stipendijos fondą ir Minimalų Pažimį stipendijai
+    /// </summary>
+    /// <param name="fondas"> Stipendijos fondas</param>
+    /// <param name="reikalavimai"> Minimalus Pažimys stipendijai</param>
     public void PirmaEilute(double fondas, double reikalavimai)
     {
         Fondas = fondas;
         Reikalavimai = reikalavimai;
     }
+    /// <summary>
+    /// konstruktorius
+    /// </summary>
     public StudentasSarasas()
     {
         pr = null;
         pb = null;
         d = null;
     }
+    /// <summary>
+    /// Įdeda duomenis atvirkštine tvarka
+    /// </summary>
+    /// <param name="naujas"> studento duomenys</param>
     public void DetiDuomenis(Studentas naujas)
     {
         pr = new Mazgas(naujas, pr);
@@ -51,6 +66,9 @@ public sealed class StudentasSarasas
     /** Grąžina sąrašo sąsajos elemento reikšmę */
     public Studentas ImtiDuomenis()
     { return d.Duom; }
+    /// <summary>
+    /// rikiavimas pagal stipendijos dydį ir vardą pavardę
+    /// </summary>
     public void Rikiuoti()
     {
         for (Mazgas d1 = pr; d1 != null; d1 = d1.Kitas)
@@ -65,13 +83,16 @@ public sealed class StudentasSarasas
             minv.Duom = St;
         }
     }
+    /// <summary>
+    /// Šalina studentus kurie negaus stipendijos
+    /// </summary>
     public void SalintiStudentus()
     {
         for (Mazgas d1 = pr; d1 != null; /*d1 = d1.Kitas*/)
         {
             d1.Duom.StipendijosDydis(PinigaiTaskui);
             if (d1.Kitas != null)
-                if (d1.Kitas.Duom.HasDebts || !d1.Kitas.Duom.ArStipendija)
+                if (d1.Kitas.Duom.ArSkola|| !d1.Kitas.Duom.ArStipendija)
                 {
                     d1.Kitas = d1.Kitas.Kitas;
                 }
@@ -81,10 +102,14 @@ public sealed class StudentasSarasas
                 d1 = d1.Kitas;
         }
         if (pr != null)
-            if (pr.Duom.HasDebts || !pr.Duom.ArStipendija)
+            if (pr.Duom.ArSkola || !pr.Duom.ArStipendija)
                 pr = pr.Kitas;
     }
-    public double PinigaiTaskui { get; private set; }
+
+    public double PinigaiTaskui { get; private set; } // 10% stipendijos
+    /// <summary>
+    /// Suskaičiuoja kiek yra 10% stipendijos
+    /// </summary>
     public void SkaiciuotiStipendijosTaskus()
     {
         int Taskai = 0;
@@ -93,7 +118,7 @@ public sealed class StudentasSarasas
             if (d1.Duom.ArGausStipendija(Reikalavimai))
             {
                 Taskai = Taskai + 10;
-                if (d1.Duom.IsTopStudent)
+                if (d1.Duom.ArPirmunas)
                     Taskai++;
             }
         }
