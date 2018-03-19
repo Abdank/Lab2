@@ -1,4 +1,4 @@
-# Lab2
+# Lab2 2.	Dinaminis atminties valdymas (L2)
 LD_14. 	Stipendijos. Studentų stipendijoms yra skiriamas nurodyto dydžio fondas. 
 Studentui skiriama stipendija, jei jo pažymių vidurkis viršija nurodytą dydį ir jis neturi skolų (visi pažymiai >4). 
 Studentui skiriama 10% didesnė stipendija, jei jo visi pažymiai didesni už 8. Toks studentas vadinamas pirmūnu. 
