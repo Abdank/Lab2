@@ -9,10 +9,10 @@ using System.IO;
 public partial class Labaratorinis2 : System.Web.UI.Page
 {
     //duomenų failai
-    public const string stduoma = "App_Data/U14a.txt";
-    public const string stduomb = "App_Data/U14b.txt";
-    //public const string stduoma = "App_Data/U14aa.txt";
-    //public const string stduomb = "App_Data/U14ba.txt";
+    //public const string stduoma = "App_Data/U14a.txt";
+    //public const string stduomb = "App_Data/U14b.txt";
+    public const string stduoma = "App_Data/U14aa.txt";
+    public const string stduomb = "App_Data/U14ba.txt";
     protected void Page_Load(object sender, EventArgs e)
     {
 
